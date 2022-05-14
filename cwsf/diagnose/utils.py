@@ -1,21 +1,20 @@
 import os
 import re
 import uuid
+from pathlib import Path
 from django.core.files import File
 from .models import DiagnoseModel
+from .ai import predict
 
 def parse_file(f):
     id = str(uuid.uuid4())
     filename = id + '.txt'
-    path = os.path.join('media', filename)
+    path = Path(os.path.join('media', filename))
+    path.touch(exist_ok=True)
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+        destination.seek(0)
         data = destination.read().decode()
         lines = re.split(r'[\s,]+', data)
-        for line in lines:
-            print(line)
-        DiagnoseModel.objects.create(
-            unique = id,
-            upload = File(destination)
-        )
+    return predict(lines)

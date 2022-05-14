@@ -18,10 +18,10 @@ class DiagnoseView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            parse_file(request.FILES['file'])
-            return redirect(self.success_url)
+            results = parse_file(request.FILES['file'])
+            return render(request, 'diagnose/success.html', {'results': results})
         else:
             return render(request, self.template_name, {'form': form})
 
-def tmp_success(request):
+def success(request):
     return render(request, 'diagnose/success.html', {})

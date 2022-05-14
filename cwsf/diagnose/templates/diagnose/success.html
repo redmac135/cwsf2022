@@ -1,1 +1,10 @@
-YAY IT WORKED
+{% block content %}
+<table>
+    {% for i in results %}
+    <tr>
+        <th>{{ i.0 }}</th>
+        <th>{{ i.1 }}</th>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
