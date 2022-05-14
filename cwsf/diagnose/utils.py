@@ -8,7 +8,6 @@ def parse_file(f):
     id = str(uuid.uuid4())
     filename = id + '.txt'
     path = os.path.join('media', filename)
-    print(path)
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)

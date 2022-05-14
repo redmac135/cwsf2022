@@ -1,5 +1,5 @@
 *.sqlite3
-files/
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
