@@ -7,23 +7,25 @@ from .utils import parse_file
 
 # Create your views here.
 class DiagnoseView(View):
-    template_name = 'diagnose/index.html'
+    template_names = ['diagnose/index.html', 'disgnose/success.html']
     form_class = DiagnoseForm
-    success_url = '/success'
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_names[0], {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            results = parse_file(request.FILES['file'])
+            try:
+                results = parse_file(request.FILES['file'])
+            except ValueError:
+                return redirect('valueError')
             labels = [x[0] for x in results]
             output = [x[1] for x in results]
-            return render(request, 'diagnose/success.html', {'labels': labels, 'output': output})
+            return render(request, self.template_names[1], {'labels': labels, 'output': output})
         else:
-            return render(request, self.template_name, {'form': form})
+            return render(request, self.template_names[0], {'form': form})
 
-def success(request):
-    return render(request, 'diagnose/success.html', {})
+def valueError(request):
+    return render(request, 'diagnose/valueError.html', {})
