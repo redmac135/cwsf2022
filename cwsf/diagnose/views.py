@@ -19,7 +19,9 @@ class DiagnoseView(View):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             results = parse_file(request.FILES['file'])
-            return render(request, 'diagnose/success.html', {'results': results})
+            labels = [x[0] for x in results]
+            output = [x[1] for x in results]
+            return render(request, 'diagnose/success.html', {'labels': labels, 'output': output})
         else:
             return render(request, self.template_name, {'form': form})
 
