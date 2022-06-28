@@ -3,11 +3,10 @@ from .forms import DiagnoseForm
 from django.views.generic import View
 from django.http.response import HttpResponse
 from cwsf.settings import BASE_DIR
-import analysis
 
 import os
 import mimetypes
-from .utils import parse_file
+from .utils import *
 
 def getRGBA(value):
     value = float(value)
