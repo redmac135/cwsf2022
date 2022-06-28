@@ -6,4 +6,7 @@
     {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
+{% for example in examples %}
+<button type="button"><a href="{% url 'download' filename=example %}">Download Example</a></button>
+{% endfor %}
 {% endblock %}
