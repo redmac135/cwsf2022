@@ -1,12 +1,13 @@
 from tensorflow import keras
 import numpy as np
+import os
 
 # Loading the Model
-model = keras.models.load_model(r'diagnose\aiassets\ForeSight.h5')
+model = keras.models.load_model(os.path.join("diagnose", "aiassets", "ForeSight.h5"))
 
 # Load scaling features
-mean = np.load(r'diagnose\aiassets\mean.npy')
-std = np.load(r'diagnose\aiassets\std.npy')
+mean = np.load(os.path.join("diagnose", "aiassets", "mean.npy"))
+std = np.load(os.path.join("diagnose", "aiassets", "std.npy"))
 
 # Scaling
 def scale(x, mean, std):
@@ -41,5 +42,5 @@ def predict(rawinput):
     for i in range(len(labels)):
         seq = [labels[i], '{0:.4f}'.format(predictions[i])]
         output.append(seq)
-    
+
     return output
