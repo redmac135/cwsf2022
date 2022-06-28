@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import DiagnoseForm
 from django.views.generic import View
 from django.http.response import HttpResponse
-from cwsf.settings import BASE_DIR, MEDIA_ROOT
+from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
