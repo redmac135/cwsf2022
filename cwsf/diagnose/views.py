@@ -1,4 +1,3 @@
-from django import views
 from django.shortcuts import render, redirect
 from .forms import DiagnoseForm
 from django.views.generic import View
@@ -18,9 +17,10 @@ class DiagnoseView(View):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             try:
-                results = parse_file(request.FILES['file'])
+                results = parse_file(request.FILES['upload'])
             except ValueError:
                 return redirect('valueError')
+            form.save()
             labels = [x[0] for x in results]
             output = [x[1] for x in results]
             return render(request, self.template_names[1], {'labels': labels, 'output': output})

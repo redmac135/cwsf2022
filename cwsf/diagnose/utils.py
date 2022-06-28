@@ -2,11 +2,12 @@ import os
 import re
 import uuid
 from pathlib import Path
-from django.core.files import File
-from .models import DiagnoseModel
 from .ai import predict
 
 def parse_file(f):
+    if not os.path.exists('media'):
+        os.makedirs('media')
+
     filename = f"{uuid.uuid4()}.txt"
     path = Path(os.path.join('media', filename))
     path.touch(exist_ok=True)
