@@ -7,8 +7,7 @@ from .models import DiagnoseModel
 from .ai import predict
 
 def parse_file(f):
-    id = str(uuid.uuid4())
-    filename = id + '.txt'
+    filename = f"{uuid.uuid4()}.txt"
     path = Path(os.path.join('media', filename))
     path.touch(exist_ok=True)
     with open(path, 'wb+') as destination:
