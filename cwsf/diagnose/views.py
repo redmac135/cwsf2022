@@ -7,7 +7,7 @@ from .utils import parse_file
 
 # Create your views here.
 class DiagnoseView(View):
-    template_names = ['diagnose/index.html', 'disgnose/success.html']
+    template_names = ['diagnose/index.html', 'diagnose/success.html']
     form_class = DiagnoseForm
 
     def get(self, request, *args, **kwargs):
