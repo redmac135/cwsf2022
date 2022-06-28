@@ -32,7 +32,7 @@ def plotComparison(sample, control, threshold=0.301):
     
     colors = [color(log_samples[i], log_control[i], threshold) for i in range(len(log_samples))]
 
-    return log_samples, log_control, x, y1, y2
+    return log_samples, log_control, x, y1, y2, colors
 
     # plt.scatter(log_samples, log_control, s=5, c=colors)
     # plt.plot(x, y1, color='black')
@@ -54,7 +54,7 @@ def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
 
     colors = [color2(log2FC[i], p[i], threshold_x, threshold_y) for i in range(len(log2FC))]
 
-    return log2FC, threshold_x, threshold_y
+    return log2FC, threshold_x, threshold_y, colors
     
     # plt.scatter(log2FC, p, s=size, c=colors)
     # plt.axhline(y=threshold_y, color='black')
