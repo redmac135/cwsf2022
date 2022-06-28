@@ -55,10 +55,10 @@ def plotComparison(sample, control, threshold=0.301):
     return log_samples, log_control, x, y1, y2, colors
 
 def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
-    log_samples = np.log2(sample)
+    log_sample = np.log2(sample)
     log_control = np.log2(control)
     
-    log2FC = log_samples - log_control
+    log2FC = log_sample - log_control
     
     z = z_score(sample, control)
     p = -np.log10(p_score(z))
@@ -66,3 +66,30 @@ def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
     colors = [color2(log2FC[i], p[i], threshold_x, threshold_y) for i in range(len(log2FC))]
 
     return log2FC, threshold_x, threshold_y, colors
+
+'''
+TO-DO: Convert matplotlib stuff to chart.js
+    
+Plotting Instructions
+    Comparison Plot:
+        plt.title('Log10 Comparison Plot')
+        plt.xlabel('Healthy')
+        plt.ylabel('Cancer')
+        plt.show()
+
+        plt.scatter(log_sample, log_control, s=5, c=colors)
+        plt.plot(x, y1, color='black')
+        plt.plot(x, y2, color='black')
+
+    Volcano Plot:
+        control_vs_target_log2(sample, control, size=25)
+        plt.title('Volcano Plot')
+        plt.xlabel('Log2 Fold Change')
+        plt.ylabel('-log10(P-value)')
+        plt.show()
+
+        plt.scatter(log2FC, p, s=size, c=colors)
+        plt.axhline(y=threshold_y, color='black')
+        plt.axvline(x=threshold_x, color='black')
+        plt.axvline(x=-threshold_x, color='black')
+'''
