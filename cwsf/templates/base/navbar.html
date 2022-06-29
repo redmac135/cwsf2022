@@ -1,21 +1,48 @@
-<nav class="block">
+{% load static %}
+
+<style>
+    .nav-link {
+        padding-bottom: 2px;
+        background: center bottom linear-gradient(#9CFF97, #9CFF97);
+        background-size: 0% 3px;
+        background-repeat: no-repeat;
+        transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+        background-size: 100% 3px;
+    }
+</style>
+
+<nav>
     <div class="w-2/3 m-auto">
-        <h1 class="p-3 text-3xl font-bold"><a href="/">FourSight</a></h1>
+        <a class="flex h-20" href="/">
+            <h1 class="p-2 text-4xl font-bold">FourSight</h1>
+            <img src={% static 'img/logo.png' %} class="p-2">
+        </a>
     </div>
-	<div class="flex shadow-md">
-		<ul class="flex m-auto">
-			<li class="p-3 text-lg">
-                Diagnosis &#9660
+    <div class="flex shadow-md">
+        <ul class="flex m-auto">
+            <li class="px-5 py-3 text-lg font-semibold">
+                <a href="/app" class="nav-link">
+                    Diagnosis
+                </a>
             </li>
-            <li class="p-3 text-lg">
-                Gene Sequence Exploration &#9660
+            <li class="px-5 py-3 text-lg font-semibold">
+                <a class="nav-link">
+                    Gene Sequence Exploration
+                </a>
             </li>
-            <li class="p-3 text-lg">
-                AI Program Guide &#9660
+            <li class="px-5 py-3 text-lg font-semibold">
+                <a class="nav-link">
+                    AI Program Guide
+                </a>
             </li>
-            <li class="p-3 text-lg">
-                Accomplishments &#9660
+            <li class="px-5 py-3 text-lg font-semibold">
+                <a class="nav-link">
+                    Accomplishments
+                </a>
             </li>
-		</ul>
-	</div>
+        </ul>
+    </div>
 </nav>
