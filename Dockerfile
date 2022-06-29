@@ -1,4 +1,4 @@
-FROM python:3.10.1
+FROM python:3.8.10
 
 # install psycopg2 dependencies
 RUN apt-get update && apt-get install -y
