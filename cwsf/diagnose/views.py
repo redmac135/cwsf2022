@@ -6,7 +6,11 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import parse_file
+from .utils import *
+
+def getRGBA(value):
+    value = float(value)
+    return f'rgba({int(value*256)},{256-int(value*256)},0,0.8)'
 
 # Create your views here.
 class DiagnoseView(View):
@@ -29,7 +33,8 @@ class DiagnoseView(View):
             form.save()
             labels = [x[0] for x in results]
             output = [x[1] for x in results]
-            return render(request, self.template_names[1], {'labels': labels, 'output': output})
+            colors = [getRGBA(x) for x in output]
+            return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors})
         else:
             return render(request, self.template_names[0], {'form': form, 'examples': self.examples})
 
