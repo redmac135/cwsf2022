@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="flex">
+    <div class="w-2/3 p-3 m-auto">
+        <div class="py-3">
+            <div class="relative flex items-center py-5">
+				<div class="flex-grow border-t border-gray-500"></div>
+				<span class="flex-shrink mx-4 text-4xl font-bold">Jupyter Notebook</span>
+				<div class="flex-grow border-t border-gray-500"></div>
+			</div>
+            <iframe
+                src="https://www.kaggle.com/embed/koralkulacoglu/microarray-cancer-differential-gene-analysis?kernelSessionId=95540682"
+                height="1000vh" style="margin: 0 auto; width: 100%;" frameborder="0" scrolling="auto"
+                title="Microarray Cancer Differential Gene Analysis"></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
