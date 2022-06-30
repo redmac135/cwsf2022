@@ -6,7 +6,7 @@ from scipy import stats
 from pathlib import Path
 
 dirname = os.path.dirname(__file__)
-geneFile = os.path.join(dirname, 'aiassets/geneIDs.txt')
+geneFile = os.path.join(dirname, 'aiassets', 'geneIDs.txt')
 
 genes = open(geneFile, 'r').read().splitlines()
 geneIDs = [i.split('\t')[0] for i in genes]
@@ -49,10 +49,7 @@ def color(x, y, threshold):
 def color2(x, y, threshold_x, threshold_y):
     if x <= -threshold_x and y >= threshold_y:
         return 'green'
-    if x >= threshold_x and y >= threshold_y:
-        return 'red'
-    else:
-        return 'gray'
+    return 'red' if x >= threshold_x and y >= threshold_y else 'gray'
 
 def plotComparison(sample, control, threshold=0.301):
     log_samples = np.log10(sample)

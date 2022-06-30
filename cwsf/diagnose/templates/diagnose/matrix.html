@@ -17,5 +17,8 @@
     }
 </style>
 <div id="matrix-wrapper"></div>
-<script src="{% static 'js/matrix.js' %}"></script>
+<script src="{% static 'diagnose/js/matrix.js' %}"></script>
+<script>
+    make_matrix(45, 57, "{{ data }}");
+</script>
 {% endblock %}

@@ -8,7 +8,3 @@ class HomePageView(TemplateView):
 
 class NotebookPageView(TemplateView):
     template_name = "pages/notebook.html"
-
-
-class MatrixPageView(TemplateView):
-    template_name = "pages/matrix.html"

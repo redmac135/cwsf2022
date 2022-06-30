@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+import json
 from .forms import DiagnoseForm
 from django.views.generic import View
 from django.http.response import HttpResponse
@@ -6,7 +7,7 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import *
+from .utils import parse_file, geneNames
 from .ai import predict
 
 def getRGBA(value):
@@ -26,32 +27,38 @@ class DiagnoseView(View):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-            try:
-                results = parse_file(request.FILES['upload'])
-                preds = predict(results)
-            except ValueError:
-                return redirect('valueError')
-            form.save()
-            labels = [x[0] for x in preds]
-            output = [x[1] for x in preds]
-            colors = [getRGBA(x) for x in output]
-            return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors})
-        else:
+        if not form.is_valid():
             return render(request, self.template_names[0], {'form': form, 'examples': self.examples})
+        try:
+            results = parse_file(request.FILES['upload'])
+            preds = predict(results)
+        except ValueError:
+            return redirect('valueError')
+        form.save()
+        labels = [x[0] for x in preds]
+        output = [x[1] for x in preds]
+        colors = [getRGBA(x) for x in output]
+        return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors})
 
 def valueError(request):
     return render(request, 'diagnose/valueError.html', {})
 
 def downloadFile(request, filename=''):
-    if filename != '':
-        filepath = os.path.join(BASE_DIR, 'diagnose', 'static', 'diagnose', 'files', filename)
-        path = open(filepath, 'rb')
-        mime_type, _ = mimetypes.guess_type(filepath)
-        response = HttpResponse(path, content_type=mime_type)
-        # Set the HTTP header for sending to browser
-        response['Content-Disposition'] = "attachment; filename=%s" % filename
-
-        return response
-    else:
+    if filename == '':
         return redirect('home')
+    filepath = os.path.join(BASE_DIR, 'diagnose', 'static', 'diagnose', 'files', filename)
+    path = open(filepath, 'rb')
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(path, content_type=mime_type)
+        # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = f"attachment; filename={filename}"
+
+    return response
+
+
+class MatrixView(View):
+    template_name = 'diagnose/matrix.html'
+
+    def get(self, request, *args, **kwargs):
+        print(json.dumps(geneNames))
+        return render(request, self.template_name, {'data': json.dumps({'gene_names': geneNames})})
