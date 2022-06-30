@@ -5,13 +5,22 @@ function get_RBG_matrix(x) {
     return color
 }
 
+function deviation(x) {
+    if (x < 85) {
+        return "low";
+    }
+    else if (x > 170) {
+        return "high";
+    }
+    return "medium";
+}
+
 function make_matrix(rows, cols, matrix_data){
     matrix_data = matrix_data.replaceAll("&quot;", "\"");
     matrix_data = JSON.parse(matrix_data);
 
     gene_names = matrix_data.gene_names;
     matrix_colors = matrix_data.matrix_colors;
-    console.log(matrix_colors);
 
     let wrapper = document.getElementById("matrix-wrapper");
     let table = document.createElement("table");
@@ -26,7 +35,7 @@ function make_matrix(rows, cols, matrix_data){
 
             let color = document.createElement("div");
             color.style.backgroundColor = get_RBG_matrix(matrix_colors[i * 45 + j]);
-            color.title = gene_names[i * 45 + j];
+            color.title = gene_names[i * 45 + j] + " (" + deviation(matrix_colors[i * 45 + j]) + " deviation)";
 
             cell.appendChild(color);
 
