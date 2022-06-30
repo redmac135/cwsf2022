@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    * {
+        padding: 0;
+    }
+</style>
+<div id="matrix-wrapper"></div>
+<script src="{% static 'js/matrix.js' %}"></script>
+{% endblock %}
