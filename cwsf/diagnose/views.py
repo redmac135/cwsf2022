@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 import json
+import re
 
 from numpy import matrix
 from .forms import DiagnoseForm
@@ -20,7 +21,7 @@ class DiagnoseView(View):
     template_names = ["diagnose/index.html", "diagnose/success.html"]
     form_class = DiagnoseForm
 
-    examples = ["example1.txt", "example2.txt", "example3.txt", "example4.txt"]
+    examples = [("1", "example2.txt"), ("2", "example3.txt"), ("3", "example4.txt")]
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
@@ -60,14 +61,45 @@ class DiagnoseView(View):
             },
         )
 
+examplenames = ["example2.txt", "example3.txt", "example4.txt"]
+def exampleView(request, filename:str = ""):
+    if filename == "":
+        return redirect('home')
+    if filename not in examplenames:
+        return redirect('home')
+    filepath = os.path.join(
+        BASE_DIR, "diagnose", "static", "diagnose", "files", filename
+    )
+    with open(filepath, "rb+") as f:
+        f.seek(0)
+        data = f.read().decode()
+        lines = re.split(r"[\s,]+", data)
+    results = list(map(float, lines))
+    preds = predict(results)
+    matrix_colors = linear_color_map(results).tolist()
+    labels = [x[0] for x in preds]
+    output = [x[1] for x in preds]
+    colors = [getRGBA(x) for x in output]
+    return render(
+        request,
+        "diagnose/success.html",
+        {
+            "labels": labels,
+            "output": output,
+            "colors": colors,
+            "matrix_data": json.dumps({
+                "gene_names": geneNames,
+                "matrix_colors": matrix_colors,
+            }),
+        },
+    )
 
 def valueError(request):
     return render(request, "diagnose/valueError.html", {})
 
-
 def downloadFile(request, filename=""):
     if filename == "":
-        return redirect("home")
+        return redirect('home')
     filepath = os.path.join(
         BASE_DIR, "diagnose", "static", "diagnose", "files", filename
     )
