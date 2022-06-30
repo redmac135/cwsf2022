@@ -13,9 +13,7 @@ fi
 
 export DJANGO_SETTINGS_MODULE=cwsf.settings.production
 
-python manage.py makemigrations
 python manage.py migrate
-python manage.py loaddata */fixtures/*.json
 python manage.py collectstatic --noinput
 python manage.py runserver 0.0.0.0:$PORT
 
