@@ -15,6 +15,7 @@ def getRGBA(value):
     return f'rgba({int(value*256)},{256-int(value*256)},0,0.8)'
 
 # Create your views here.
+gene_names_json = json.dumps({'gene_names': geneNames})
 class DiagnoseView(View):
     template_names = ['diagnose/index.html', 'diagnose/success.html']
     form_class = DiagnoseForm
@@ -38,7 +39,7 @@ class DiagnoseView(View):
         labels = [x[0] for x in preds]
         output = [x[1] for x in preds]
         colors = [getRGBA(x) for x in output]
-        return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors})
+        return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors, 'matrix_data': gene_names_json})
 
 def valueError(request):
     return render(request, 'diagnose/valueError.html', {})
@@ -55,10 +56,3 @@ def downloadFile(request, filename=''):
 
     return response
 
-
-class MatrixView(View):
-    template_name = 'diagnose/matrix.html'
-
-    def get(self, request, *args, **kwargs):
-        print(json.dumps(geneNames))
-        return render(request, self.template_name, {'data': json.dumps({'gene_names': geneNames})})

@@ -7,10 +7,13 @@ from pathlib import Path
 
 dirname = os.path.dirname(__file__)
 geneFile = os.path.join(dirname, 'aiassets', 'geneIDs.txt')
+controlFile = os.path.join(dirname, 'aiassets', 'control.npy')
 
 genes = open(geneFile, 'r').read().splitlines()
 geneIDs = [i.split('\t')[0] for i in genes]
 geneNames = [i.split('\t')[2] for i in genes]
+control_arr = np.load(controlFile)
+
 
 def parse_file(f):
     if not os.path.exists('media'):
@@ -25,7 +28,7 @@ def parse_file(f):
         destination.seek(0)
         data = destination.read().decode()
         lines = re.split(r'[\s,]+', data)
-    return lines
+    return list(map(float, lines))
 
 def gene_ID(x, y):
     return geneIDs[x*45 + y]
