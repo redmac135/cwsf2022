@@ -39,6 +39,12 @@ def gene_name(x, y):
     return geneNames[x * 45 + y]
 
 
+def linear_color_map(arr):
+    mn, mx = min(arr), max(arr)
+    arr = (arr - mn) / (mx - mn) * 255
+    return arr.astype(np.uint8)
+
+
 def z_score(sample, avg_control, std_control):
     return (sample - avg_control) / std_control
 

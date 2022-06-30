@@ -7,7 +7,7 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import parse_file, geneNames
+from .utils import parse_file, geneNames, control_arr, linear_color_map
 from .ai import predict
 
 
@@ -17,7 +17,6 @@ def getRGBA(value):
 
 
 # Create your views here.
-gene_names_json = json.dumps({"gene_names": geneNames})
 
 
 class DiagnoseView(View):
@@ -43,6 +42,8 @@ class DiagnoseView(View):
         try:
             results = parse_file(request.FILES["upload"])
             preds = predict(results)
+            matrix_colors = control_arr - results
+            matrix_colors = linear_color_map(matrix_colors).tolist()
         except ValueError:
             return redirect("valueError")
         form.save()
@@ -56,7 +57,10 @@ class DiagnoseView(View):
                 "labels": labels,
                 "output": output,
                 "colors": colors,
-                "matrix_data": gene_names_json,
+                "matrix_data": json.dumps({
+                    "gene_names": geneNames,
+                    "matrix_colors": matrix_colors,
+                }),
             },
         )
 

@@ -1,6 +1,10 @@
-function make_matrix(rows, cols, gene_names){
-    gene_names = gene_names.replaceAll("&quot;", "\"");
-    gene_names = JSON.parse(gene_names).gene_names;
+function make_matrix(rows, cols, matrix_data){
+    matrix_data = matrix_data.replaceAll("&quot;", "\"");
+    matrix_data = JSON.parse(matrix_data);
+
+    gene_names = matrix_data.gene_names;
+    matrix_colors = matrix_data.matrix_colors;
+    console.log(matrix_colors);
 
     let wrapper = document.getElementById("matrix-wrapper");
     let table = document.createElement("table");
@@ -14,7 +18,7 @@ function make_matrix(rows, cols, gene_names){
             cell.id = "cell-" + i + "-" + j;
 
             let color = document.createElement("div");
-            color.style.backgroundColor = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+            color.style.backgroundColor = "rgb(" + matrix_colors[i * 45 + j] + "," +(255-matrix_colors[i * 45 + j])+ ", 0)";
             color.title = gene_names[i * 45 + j];
 
             cell.appendChild(color);
