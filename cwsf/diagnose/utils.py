@@ -6,7 +6,7 @@ from scipy import stats
 from pathlib import Path
 
 dirname = os.path.dirname(__file__)
-geneFile = os.path.join(dirname, 'aiassets/geneIDS.txt')
+geneFile = os.path.join(dirname, 'aiassets/geneIDs.txt')
 
 genes = open(geneFile, 'r').read().splitlines()
 geneIDs = [i.split('\t')[0] for i in genes]
@@ -57,11 +57,11 @@ def color2(x, y, threshold_x, threshold_y):
 def plotComparison(sample, control, threshold=0.301):
     log_samples = np.log10(sample)
     log_control = np.log10(control)
-    
+
     x = np.arange(min(log_samples), max(log_samples), 0.001)
     y1 = x + threshold
     y2 = x - threshold
-    
+
     colors = [color(log_samples[i], log_control[i], threshold) for i in range(len(log_samples))]
 
     return log_samples, log_control, x, y1, y2, colors
@@ -69,9 +69,9 @@ def plotComparison(sample, control, threshold=0.301):
 def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
     log_sample = np.log2(sample)
     log_control = np.log2(control)
-    
+
     log2FC = log_sample - log_control
-    
+
     z = z_score(sample, control)
     p = -np.log10(p_score(z))
 
@@ -81,7 +81,7 @@ def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
 
 '''
 TO-DO: Convert matplotlib stuff to chart.js
-    
+
 Plotting Instructions
     Comparison Plot:
         plt.title('Log10 Comparison Plot')
