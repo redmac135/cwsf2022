@@ -13,8 +13,6 @@ function make_matrix(rows, cols){
 
             let color = document.createElement("div");
             color.style.backgroundColor = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
-            color.style.height = "10px";
-            color.style.width = "10px";
             color.title = "Cell " + i + "-" + j;
 
             cell.appendChild(color);
