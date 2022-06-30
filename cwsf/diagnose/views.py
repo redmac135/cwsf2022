@@ -7,6 +7,7 @@ from cwsf.settings import BASE_DIR
 import os
 import mimetypes
 from .utils import *
+from .ai import predict
 
 def getRGBA(value):
     value = float(value)
@@ -28,11 +29,12 @@ class DiagnoseView(View):
         if form.is_valid():
             try:
                 results = parse_file(request.FILES['upload'])
+                preds = predict(results)
             except ValueError:
                 return redirect('valueError')
             form.save()
-            labels = [x[0] for x in results]
-            output = [x[1] for x in results]
+            labels = [x[0] for x in preds]
+            output = [x[1] for x in preds]
             colors = [getRGBA(x) for x in output]
             return render(request, self.template_names[1], {'labels': labels, 'output': output, 'colors': colors})
         else:

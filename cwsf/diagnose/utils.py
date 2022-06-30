@@ -4,7 +4,13 @@ import uuid
 import numpy as np
 from scipy import stats
 from pathlib import Path
-from .ai import predict
+
+dirname = os.path.dirname(__file__)
+geneFile = os.path.join(dirname, 'aiassets/geneIDS.txt')
+
+genes = open(geneFile, 'r').read().splitlines()
+geneIDs = [i.split('\t')[0] for i in genes]
+geneNames = [i.split('\t')[2] for i in genes]
 
 def parse_file(f):
     if not os.path.exists('media'):
@@ -19,7 +25,13 @@ def parse_file(f):
         destination.seek(0)
         data = destination.read().decode()
         lines = re.split(r'[\s,]+', data)
-    return predict(lines)
+    return lines
+
+def gene_ID(x, y):
+    return geneIDs[x*45 + y]
+
+def gene_name(x, y):
+    return geneNames[x*45 + y]
 
 def z_score(sample, avg_control, std_control):
     return (sample - avg_control) / std_control
