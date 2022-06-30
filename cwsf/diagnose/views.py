@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 import json
+
+from numpy import matrix
 from .forms import DiagnoseForm
 from django.views.generic import View
 from django.http.response import HttpResponse
@@ -7,13 +9,8 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import parse_file, geneNames, control_arr, linear_color_map
+from .utils import parse_file, geneNames, getRGBA, linear_color_map
 from .ai import predict
-
-
-def getRGBA(value):
-    value = float(value)
-    return f"rgba({int(value*256)},{256-int(value*256)},0,0.8)"
 
 
 # Create your views here.
@@ -42,8 +39,7 @@ class DiagnoseView(View):
         try:
             results = parse_file(request.FILES["upload"])
             preds = predict(results)
-            matrix_colors = control_arr - results
-            matrix_colors = linear_color_map(matrix_colors).tolist()
+            matrix_colors = linear_color_map(results).tolist()
         except ValueError:
             return redirect("valueError")
         form.save()
