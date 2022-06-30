@@ -13,20 +13,22 @@ std = np.load(os.path.join("diagnose", "aiassets", "std.npy"))
 def scale(x, mean, std):
     return (x - mean) / std
 
+
 labels = [
-    'bladder',
-    'breast',
-    'colorectal',
-    'esophageal',
-    'gastric',
-    'glioma',
-    'liver',
-    'lung',
-    'non-cancer',
-    'ovarian',
-    'pancreatic',
-    'prostate'
+    "bladder",
+    "breast",
+    "colorectal",
+    "esophageal",
+    "gastric",
+    "glioma",
+    "liver",
+    "lung",
+    "non-cancer",
+    "ovarian",
+    "pancreatic",
+    "prostate",
 ]
+
 
 def predict(rawinput):
     # scaling the AI
@@ -40,7 +42,7 @@ def predict(rawinput):
 
     # DIAGNOSIS
     for i in range(len(labels)):
-        seq = [labels[i], '{0:.4f}'.format(predictions[i])]
+        seq = [labels[i], "{0:.4f}".format(predictions[i])]
         output.append(seq)
 
     return output
