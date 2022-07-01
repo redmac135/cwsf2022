@@ -45,6 +45,7 @@ def getRGBA(x):
     g = 255 if x > 0.5 else (x*2)*255
     return f"rgba({int(r)},{int(g)},0,0.8)"
 
+
 def linear_color_map(arr):
     delta = control_arr - arr
     mn, mx = min(delta), max(delta)
