@@ -3,7 +3,7 @@ import json
 import re
 
 from numpy import matrix
-from .forms import DiagnoseForm
+from .forms import DiagnoseForm, GenelabForm
 from django.views.generic import View
 from django.http.response import HttpResponse
 from cwsf.settings import BASE_DIR
@@ -18,7 +18,7 @@ from .ai import predict
 
 
 class DiagnoseView(View):
-    template_names = ["diagnose/index.html", "diagnose/success.html"]
+    template_names = ["diagnose/diagnose_form.html", "diagnose/diagnose_results.html"]
     form_class = DiagnoseForm
 
     examples = [("1", "example2.txt"), ("2", "example3.txt"), ("3", "example4.txt")]
@@ -82,7 +82,7 @@ def exampleView(request, filename:str = ""):
     colors = [getRGBA(x) for x in output]
     return render(
         request,
-        "diagnose/success.html",
+        "diagnose/diagnose_results.html",
         {
             "labels": labels,
             "output": output,
@@ -110,3 +110,47 @@ def downloadFile(request, filename=""):
     response["Content-Disposition"] = f"attachment; filename={filename}"
 
     return response
+
+class GenelabView(View):
+    template_names = ["diagnose/genelab_form.html", "diagnose/genelab_success.html"]
+    form_class = GenelabForm
+
+    examples = [("1", "example2.txt"), ("2", "example3.txt"), ("3", "example4.txt")]
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(
+            request, self.template_names[0], {"form": form, "examples": self.examples}
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if not form.is_valid():
+            return render(
+                request,
+                self.template_names[0],
+                {"form": form, "examples": self.examples},
+            )
+        try:
+            results = parse_file(request.FILES["upload"])
+            preds = predict(results)
+            matrix_colors = linear_color_map(results).tolist()
+        except ValueError:
+            return redirect("valueError")
+        form.save()
+        labels = [x[0] for x in preds]
+        output = [x[1] for x in preds]
+        colors = [getRGBA(x) for x in output]
+        return render(
+            request,
+            self.template_names[1],
+            {
+                "labels": labels,
+                "output": output,
+                "colors": colors,
+                "matrix_data": json.dumps({
+                    "gene_names": geneNames,
+                    "matrix_colors": matrix_colors,
+                }),
+            },
+        )
