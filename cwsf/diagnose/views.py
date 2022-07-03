@@ -112,7 +112,7 @@ def downloadFile(request, filename=""):
     return response
 
 class GenelabView(View):
-    template_names = ["diagnose/genelab_form.html", "diagnose/genelab_success.html"]
+    template_names = ["diagnose/genelab_form.html", "diagnose/genelab_results.html"]
     form_class = GenelabForm
 
     examples = [("1", "example2.txt"), ("2", "example3.txt"), ("3", "example4.txt")]
