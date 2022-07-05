@@ -8,43 +8,74 @@
 {% block content %}
 <div class="relative flex items-center w-2/3 py-5 m-auto">
     <div class="flex-grow border-t border-gray-500"></div>
-    <span class="flex-shrink mx-4 text-4xl font-bold">Predicted Results</span>
+    <span class="flex-shrink mx-4 text-4xl font-bold">Statistical Analysis</span>
     <div class="flex-grow border-t border-gray-500"></div>
 </div>
 <div class="flex">
     <div class="flex m-auto">
         <div class="w-1/2 p-3">
-            <canvas id="chart" width="500" height="500"></canvas>
+            <canvas id="comparison" width="500" height="500"></canvas>
+            <canvas id="volcano" width="500" height="500"></canvas>
             <script>
-            let ctx = document.getElementById("chart").getContext("2d");
+            let ctx = document.getElementById("comparison").getContext("2d");
 
             let chart = new Chart(ctx, {
-                type: "bar",
+                type: "scatter",
                 data: {
-                    labels: {{ labels| safe }},
-            datasets: [
-                {
-                    label: "Probability",
-                    backgroundColor: {{ colors| safe }},
-                borderColor: "#417690",
-                data: {{ output| safe }}
-            }
-            ]
-    },
-            options: {
-                indexAxis: 'y',
-                    elements: {
-                    bar: {
-                        borderWidth: 2,
-            },
+                    datasets: [{
+                        label: "Log10 Comparison Plot",
+                        backgroundColor: {{ comp_colors| safe }},
+                        borderColor: "#417690",
+                        data: {{ comp| safe }}
+                    }]
                 },
-                responsive: true,
-                    title: {
-                    text: "Cancer Detection Certainties",
-                        display: true
+                options: {
+                    scales: {
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Sample Genes"
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Control Genes"
+                            }
+                        }]
+                    }
                 }
-            }
-});
+            });
+
+            let ctx2 = document.getElementById("volcano").getContext("2d");
+
+            let chart2 = new Chart(ctx2, {
+                type: "scatter",
+                data: {
+                    datasets: [{
+                        label: "Volcano Plot",
+                        backgroundColor: {{ volcano_colors| safe }},
+                        borderColor: "#417690",
+                        data: {{ volcano| safe }}
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Log2 Fold Change"
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "-log10(p-value)"
+                            }
+                        }]
+                    }
+                }
+            });
         </script>
     </div>
     <div class="w-1/2 p-3">
@@ -63,12 +94,11 @@
                 transform: scale(1.5);
             }
             </style>
-        <div id="matrix-wrapper"></div>
-        <script src="{% static 'diagnose/js/matrix.js' %}"></script>
-        <script>
-            make_matrix(45, 57, "{{ matrix_data }}");
-            </script>
     </div>
-</div>
+    <div id="matrix-wrapper"></div>
+    <script src="{% static 'diagnose/js/matrix.js' %}"></script>
+    <script>
+        make_matrix(45, 57, "{{ matrix_data }}");
+    </script>
 </div>
 {% endblock %}

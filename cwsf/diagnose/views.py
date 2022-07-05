@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 import json
 import re
 
-from numpy import matrix
 from .forms import DiagnoseForm, GenelabForm
 from django.views.generic import View
 from django.http.response import HttpResponse
@@ -10,7 +9,7 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import parse_file, geneNames, getRGBA, linear_color_map
+from .utils import parse_file, geneNames, getRGBA, linear_color_map, plotComparison, plotVolcano
 from .ai import predict
 
 
@@ -133,21 +132,26 @@ class GenelabView(View):
             )
         try:
             results = parse_file(request.FILES["upload"])
-            preds = predict(results)
+
+            log_samples, log_control, comp_colors = plotComparison(results)
+            log2FC, p, volcano_colors = plotVolcano(results)
+
+            comp = [{'x': log_samples[i], 'y': log_control[i]} for i in range(len(log_samples))]
+
+            volcano = [{'x': log2FC[i], 'y': p[i]} for i in range(len(log2FC))]
+
             matrix_colors = linear_color_map(results).tolist()
         except ValueError:
             return redirect("valueError")
         form.save()
-        labels = [x[0] for x in preds]
-        output = [x[1] for x in preds]
-        colors = [getRGBA(x) for x in output]
         return render(
             request,
             self.template_names[1],
             {
-                "labels": labels,
-                "output": output,
-                "colors": colors,
+                "comp": comp,
+                "comp_colors": comp_colors,
+                "volcano": volcano,
+                "volcano_colors": volcano_colors,
                 "matrix_data": json.dumps({
                     "gene_names": geneNames,
                     "matrix_colors": matrix_colors,

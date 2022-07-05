@@ -13,6 +13,7 @@ genes = open(geneFile, "r").read().splitlines()
 geneIDs = [i.split("\t")[0] for i in genes]
 geneNames = [i.split("\t")[2] for i in genes]
 control_arr = np.load(controlFile)
+std_control = np.std(control_arr)
 
 
 def parse_file(f):
@@ -53,8 +54,8 @@ def linear_color_map(arr):
     return 255 - delta.astype(np.uint8)
 
 
-def z_score(sample, avg_control, std_control):
-    return (sample - avg_control) / std_control
+def z_score(sample, control):
+    return (sample - control) / std_control
 
 
 def p_score(z):
@@ -75,7 +76,10 @@ def color2(x, y, threshold_x, threshold_y):
     return "red" if x >= threshold_x and y >= threshold_y else "gray"
 
 
-def plotComparison(sample, control, threshold=0.301):
+def plotComparison(sample, threshold=0.301):
+    sample = abs(np.array(sample))
+    control = abs(control_arr)
+
     log_samples = np.log10(sample)
     log_control = np.log10(control)
 
@@ -88,10 +92,13 @@ def plotComparison(sample, control, threshold=0.301):
         for i in range(len(log_samples))
     ]
 
-    return log_samples, log_control, x, y1, y2, colors
+    return log_samples, log_control, colors
 
 
-def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
+def plotVolcano(sample, threshold_x=1.0, threshold_y=1.301):
+    sample = abs(np.array(sample))
+    control = abs(control_arr)
+    
     log_sample = np.log2(sample)
     log_control = np.log2(control)
 
@@ -104,7 +111,7 @@ def plotVolcano(sample, control, threshold_x=1.0, threshold_y=1.301):
         color2(log2FC[i], p[i], threshold_x, threshold_y) for i in range(len(log2FC))
     ]
 
-    return log2FC, threshold_x, threshold_y, colors
+    return log2FC, p, colors
 
 
 """
