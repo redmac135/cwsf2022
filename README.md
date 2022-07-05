@@ -18,5 +18,6 @@ pip install -r requirements.txt
 Start the server
 
 ```bash
-python cwsf/manage.py runserver
+cd cwsf
+python manage.py runserver
 ```
