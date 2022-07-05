@@ -16,7 +16,7 @@
 
 <nav>
     <div class="w-2/3 m-auto">
-        <a class="flex h-20" href="/">
+        <a class="flex h-20" href="{% url 'home' %}">
             <h1 class="p-2 text-4xl font-bold">FourSight</h1>
             <img src={% static 'img/logo.png' %} class="p-2">
         </a>
@@ -24,12 +24,12 @@
     <div class="flex shadow-md">
         <ul class="flex m-auto">
             <li class="px-5 py-3 text-lg font-semibold">
-                <a href="/app" class="nav-link">
+                <a href="{% url 'diagnose' %}" class="nav-link">
                     Diagnosis
                 </a>
             </li>
             <li class="px-5 py-3 text-lg font-semibold">
-                <a href="/app/genelab"  class="nav-link">
+                <a href="{% url 'genelab' %}"  class="nav-link">
                     Gene Sequence Exploration
                 </a>
             </li>
