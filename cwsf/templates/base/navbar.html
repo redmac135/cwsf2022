@@ -14,11 +14,11 @@
     }
 </style>
 
-<nav>
+<nav class="mb-4">
     <div class="w-2/3 m-auto">
-        <a class="flex h-20" href="{% url 'home' %}">
+        <a class="flex h-16" href="{% url 'home' %}">
+            <img src={% static 'img/logo.png' %} class="h-auto px-2">
             <h1 class="p-2 text-4xl font-bold">FourSight</h1>
-            <img src={% static 'img/logo.png' %} class="p-2">
         </a>
     </div>
     <div class="flex shadow-md">
