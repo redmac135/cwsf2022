@@ -1,24 +1,68 @@
-{% extends 'base/base.html' %}
-
-{% block content %}
+{% extends 'base/base.html' %} {% block content %}
 
 <div class="flex">
-    <div class="w-2/3 p-3 m-auto">
-        <h1 class="font-bold text-clr-accent-1 text-7xl text-center mb-8">AI Guide</h1>
-        <br>
-        <p>
-            The basic principle behind our innovation is the use of microarray genetic test samples to diagnose a patient's cancer condition. Using genetic test data retrieved from the Gene Expression Omnibus Database, over 27,000 sample tests were used to train our multilayer perceptron neural network to recognize 12 different types of cancers. Our AI employs backpropagation in order to adjust its internal workings based on the samples provided. The more data we obtain, the more accurate our AI becomes (currently 95%). Our <u><b><a href="{% url 'diagnose' %}" target="_blank">AI Diagnosis</a></b></u> page allows users to input a sample microarray (currently the 3D-Gene Human miRNA V21_1.0.0) with 2575 genes and receive an instant cancer diagnosis, along with a recreated visual representation of the original microarray test image.
-        </p>
-        <br>
-        <p>
-            Furthering our mission to provide insights into genetic factors in cancer, we created a <u><b><a href="{% url 'genelab' %}" target="_blank">Gene Lab</a></b></u> page, which allows users to input a microarray sample and find the differentially expressed genes. Using statistical methods, our program is able to identify possible biomarker genes by providing visual representations of gene expression profiles of different classes of cancer. Through our exploration page, an input of a microarray sample will return an output of a log10 comparison graph, showing genes with abnormally heightened or lowered expression levels, as well as a volcano plot, which finds genes that also pass the statistical significant threshold of p < 0.1.
-        </p>
-        <br>
-        <p>
-            All in all, our free, accessible, and easy-to-use platform allows users to conduct diagnoses and cancerous gene biomarker identification using genetic tests. The code behind our two programs are accessible in the <u><b><a href="{% url 'notebook' %}" target="_blank">Notebook</a></b></u> page, and a detailed <u><b><a href="https://www.overleaf.com/read/wnpwghjkgpgc" target="_blank">Report</a></b></u> going into the further details of our project is available. Feel free to reach out to us for inquiries or feedback about our project!
-        </p>
-        <br>
-    </div>
+  <div class="w-2/3 p-3 m-auto">
+    <h1 class="font-bold text-clr-accent-1 text-7xl text-center mb-8">
+      AI Guide
+    </h1>
+    <br />
+    <p>
+      The basic principle behind our innovation is the use of microarray genetic
+      test samples to diagnose a patient's cancer condition. Using genetic test
+      data retrieved from the Gene Expression Omnibus Database, over 27,000
+      sample tests were used to train our multilayer perceptron neural network
+      to recognize 12 different types of cancers. Our AI employs backpropagation
+      in order to adjust its internal workings based on the samples provided.
+      The more data we obtain, the more accurate our AI becomes (currently 95%).
+      Our
+      <u
+        ><b
+          ><a href="{% url 'diagnose' %}" target="_blank">AI Diagnosis</a></b
+        ></u
+      >
+      page allows users to input a sample microarray (currently the 3D-Gene
+      Human miRNA V21_1.0.0) with 2575 genes and receive an instant cancer
+      diagnosis, along with a recreated visual representation of the original
+      microarray test image.
+    </p>
+    <br />
+    <p>
+      Furthering our mission to provide insights into genetic factors in cancer,
+      we created a
+      <u
+        ><b><a href="{% url 'genelab' %}" target="_blank">Gene Lab</a></b></u
+      >
+      page, which allows users to input a microarray sample and find the
+      differentially expressed genes. Using statistical methods, our program is
+      able to identify possible biomarker genes by providing visual
+      representations of gene expression profiles of different classes of
+      cancer. Through our exploration page, an input of a microarray sample will
+      return an output of a log10 comparison graph, showing genes with
+      abnormally heightened or lowered expression levels, as well as a volcano
+      plot, which finds genes that also pass the statistical significant
+      threshold of p < 0.1.
+    </p>
+    <br />
+    <p>
+      All in all, our free, accessible, and easy-to-use platform allows users to
+      conduct diagnoses and cancerous gene biomarker identification using
+      genetic tests. The code behind our two programs are accessible in the
+      <u
+        ><b><a href="{% url 'notebook' %}" target="_blank">Notebook</a></b></u
+      >
+      page, and a detailed
+      <u
+        ><b
+          ><a href="https://www.overleaf.com/read/wnpwghjkgpgc" target="_blank"
+            >Report</a
+          ></b
+        ></u
+      >
+      going into the further details of our project is available. Feel free to
+      reach out to us for inquiries or feedback about our project!
+    </p>
+    <br />
+  </div>
 </div>
 
 {% endblock %}

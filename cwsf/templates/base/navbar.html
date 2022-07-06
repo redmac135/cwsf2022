@@ -1,54 +1,44 @@
 {% load static %}
 
 <style>
-    .nav-link {
-        padding-bottom: 2px;
-        background: center bottom linear-gradient(#9CFF97, #9CFF97);
-        background-size: 0% 3px;
-        background-repeat: no-repeat;
-        transition: all 0.2s;
-    }
+  .nav-link {
+    padding-bottom: 2px;
+    background: center bottom linear-gradient(#9cff97, #9cff97);
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    transition: all 0.2s;
+  }
 
-    .nav-link:hover {
-        background-size: 100% 3px;
-    }
+  .nav-link:hover {
+    background-size: 100% 3px;
+  }
 </style>
 
 <nav class="mb-4">
-    <div class="w-2/3 m-auto">
-        <a class="flex h-16" href="{% url 'home' %}">
-            <img src={% static 'img/logo.png' %} class="h-auto px-2">
-            <h1 class="p-2 text-4xl font-bold">FourSight</h1>
-        </a>
-    </div>
-    <div class="flex shadow-md">
-        <ul class="flex m-auto">
-            <!-- home page -->
-            <li class="px-5 py-3 text-lg font-semibold">
-                <a href="{% url 'home' %}" class="nav-link">
-                    Home
-                </a>
-            </li>
-            <li class="px-5 py-3 text-lg font-semibold">
-                <a href="{% url 'diagnose' %}" class="nav-link">
-                    AI Diagnosis
-                </a>
-            </li>
-            <li class="px-5 py-3 text-lg font-semibold">
-                <a href="{% url 'genelab' %}"  class="nav-link">
-                    Gene Lab
-                </a>
-            </li>
-            <li class="px-5 py-3 text-lg font-semibold">
-                <a href="{% url 'guide' %}" class="nav-link">
-                    Guide
-                </a>
-            </li>
-            <li class="px-5 py-3 text-lg font-semibold">
-                <a class="nav-link">
-                    Accomplishments
-                </a>
-            </li>
-        </ul>
-    </div>
+  <div class="w-2/3 m-auto">
+    <a class="flex h-16" href="{% url 'home' %}">
+      <img src={% static 'img/logo.png' %} class="h-auto px-2">
+      <h1 class="p-2 text-4xl font-bold">FourSight</h1>
+    </a>
+  </div>
+  <div class="flex shadow-md">
+    <ul class="flex m-auto">
+      <!-- home page -->
+      <li class="px-5 py-3 text-lg font-semibold">
+        <a href="{% url 'home' %}" class="nav-link"> Home </a>
+      </li>
+      <li class="px-5 py-3 text-lg font-semibold">
+        <a href="{% url 'diagnose' %}" class="nav-link"> AI Diagnosis </a>
+      </li>
+      <li class="px-5 py-3 text-lg font-semibold">
+        <a href="{% url 'genelab' %}" class="nav-link"> Gene Lab </a>
+      </li>
+      <li class="px-5 py-3 text-lg font-semibold">
+        <a href="{% url 'guide' %}" class="nav-link"> Guide </a>
+      </li>
+      <li class="px-5 py-3 text-lg font-semibold">
+        <a class="nav-link"> Accomplishments </a>
+      </li>
+    </ul>
+  </div>
 </nav>
