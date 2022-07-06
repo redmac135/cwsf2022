@@ -8,6 +8,7 @@ class DiagnoseForm(ModelForm):
         model = DiagnoseModel
         fields = ["upload"]
 
+
 class GenelabForm(ModelForm):
     class Meta:
         model = GenelabModel

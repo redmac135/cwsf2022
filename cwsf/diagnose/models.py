@@ -4,5 +4,6 @@ from django.db import models
 class DiagnoseModel(models.Model):
     upload = models.FileField()
 
+
 class GenelabModel(models.Model):
     upload = models.FileField()

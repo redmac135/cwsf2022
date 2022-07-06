@@ -9,7 +9,14 @@ from cwsf.settings import BASE_DIR
 
 import os
 import mimetypes
-from .utils import parse_file, geneNames, getRGBA, linear_color_map, plotComparison, plotVolcano
+from .utils import (
+    parse_file,
+    geneNames,
+    getRGBA,
+    linear_color_map,
+    plotComparison,
+    plotVolcano,
+)
 from .ai import predict
 
 
@@ -51,12 +58,15 @@ class DiagnoseView(View):
                 "labels": labels,
                 "output": output,
                 "colors": colors,
-                "matrix_data": json.dumps({
-                    "gene_names": geneNames,
-                    "matrix_colors": matrix_colors,
-                }),
+                "matrix_data": json.dumps(
+                    {
+                        "gene_names": geneNames,
+                        "matrix_colors": matrix_colors,
+                    }
+                ),
             },
         )
+
 
 class GenelabView(View):
     template_names = ["diagnose/genelab_form.html", "diagnose/genelab_results.html"]
@@ -84,9 +94,12 @@ class GenelabView(View):
             log_samples, log_control, comp_colors = plotComparison(results)
             log2FC, p, volcano_colors = plotVolcano(results)
 
-            comp = [{'x': log_samples[i], 'y': log_control[i]} for i in range(len(log_samples))]
+            comp = [
+                {"x": log_samples[i], "y": log_control[i]}
+                for i in range(len(log_samples))
+            ]
 
-            volcano = [{'x': log2FC[i], 'y': p[i]} for i in range(len(log2FC))]
+            volcano = [{"x": log2FC[i], "y": p[i]} for i in range(len(log2FC))]
 
             matrix_colors = linear_color_map(results).tolist()
         except ValueError:
@@ -100,21 +113,25 @@ class GenelabView(View):
                 "comp_colors": comp_colors,
                 "volcano": volcano,
                 "volcano_colors": volcano_colors,
-                "matrix_data": json.dumps({
-                    "gene_names": geneNames,
-                    "matrix_colors": matrix_colors,
-                }),
+                "matrix_data": json.dumps(
+                    {
+                        "gene_names": geneNames,
+                        "matrix_colors": matrix_colors,
+                    }
+                ),
             },
         )
+
 
 # Example Views
 EXAMPLE_NAMES = ["example2.txt", "example3.txt", "example4.txt"]
 
-def diagnose_file(request, filename:str = ""):
+
+def diagnose_file(request, filename: str = ""):
     if filename == "":
-        return redirect('diagnose')
+        return redirect("diagnose")
     if filename not in EXAMPLE_NAMES:
-        return redirect('diagnose')
+        return redirect("diagnose")
 
     filepath = os.path.join(
         BASE_DIR, "diagnose", "static", "diagnose", "files", filename
@@ -136,18 +153,21 @@ def diagnose_file(request, filename:str = ""):
             "labels": labels,
             "output": output,
             "colors": colors,
-            "matrix_data": json.dumps({
-                "gene_names": geneNames,
-                "matrix_colors": matrix_colors,
-            }),
+            "matrix_data": json.dumps(
+                {
+                    "gene_names": geneNames,
+                    "matrix_colors": matrix_colors,
+                }
+            ),
         },
     )
 
-def genelab_file(request, filename:str = ""):
+
+def genelab_file(request, filename: str = ""):
     if filename == "":
-        return redirect('genelab')
+        return redirect("genelab")
     if filename not in EXAMPLE_NAMES:
-        return redirect('genelab')
+        return redirect("genelab")
 
     filepath = os.path.join(
         BASE_DIR, "diagnose", "static", "diagnose", "files", filename
@@ -160,9 +180,9 @@ def genelab_file(request, filename:str = ""):
     log_samples, log_control, comp_colors = plotComparison(results)
     log2FC, p, volcano_colors = plotVolcano(results)
 
-    comp = [{'x': log_samples[i], 'y': log_control[i]} for i in range(len(log_samples))]
+    comp = [{"x": log_samples[i], "y": log_control[i]} for i in range(len(log_samples))]
 
-    volcano = [{'x': log2FC[i], 'y': p[i]} for i in range(len(log2FC))]
+    volcano = [{"x": log2FC[i], "y": p[i]} for i in range(len(log2FC))]
 
     matrix_colors = linear_color_map(results).tolist()
     return render(
@@ -173,20 +193,24 @@ def genelab_file(request, filename:str = ""):
             "comp_colors": comp_colors,
             "volcano": volcano,
             "volcano_colors": volcano_colors,
-            "matrix_data": json.dumps({
-                "gene_names": geneNames,
-                "matrix_colors": matrix_colors,
-            }),
+            "matrix_data": json.dumps(
+                {
+                    "gene_names": geneNames,
+                    "matrix_colors": matrix_colors,
+                }
+            ),
         },
     )
+
 
 # Utility Views
 def valueError(request):
     return render(request, "diagnose/valueError.html", {})
 
+
 def downloadFile(request, filename=""):
     if filename == "":
-        return redirect('home')
+        return redirect("home")
     filepath = os.path.join(
         BASE_DIR, "diagnose", "static", "diagnose", "files", filename
     )

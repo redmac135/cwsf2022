@@ -1,5 +1,12 @@
 from django.urls import path
-from .views import DiagnoseView, GenelabView, valueError, downloadFile, diagnose_file, genelab_file
+from .views import (
+    DiagnoseView,
+    GenelabView,
+    valueError,
+    downloadFile,
+    diagnose_file,
+    genelab_file,
+)
 
 urlpatterns = [
     path("error", valueError, name="valueError"),

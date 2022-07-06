@@ -42,8 +42,8 @@ def gene_name(x, y):
 
 def getRGBA(x):
     x = float(x)
-    r = 255 if x < 0.5 else 255-(x*2-1)*255
-    g = 255 if x > 0.5 else (x*2)*255
+    r = 255 if x < 0.5 else 255 - (x * 2 - 1) * 255
+    g = 255 if x > 0.5 else (x * 2) * 255
     return f"rgba({int(r)},{int(g)},0,0.8)"
 
 
@@ -98,7 +98,7 @@ def plotComparison(sample, threshold=0.301):
 def plotVolcano(sample, threshold_x=1.0, threshold_y=1.301):
     sample = abs(np.array(sample))
     control = abs(control_arr)
-    
+
     log_sample = np.log2(sample)
     log_control = np.log2(control)
 
