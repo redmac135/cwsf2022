@@ -8,7 +8,8 @@
     "postcss": "postcss ./cwsf/assets/base/css/base.css -o ./cwsf/static/base/css/base.css",
     "postcss-dev": "postcss ./cwsf/assets/base/css/base.css -o ./cwsf/static/base/css/base.css --watch",
     "format": "prettier --write .",
-    "ci": "prettier --check ."
+    "ci": "prettier --check .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
     "cssnano": "^5.1.12",
+    "husky": "^8.0.1",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
     "prettier": "2.7.1",
