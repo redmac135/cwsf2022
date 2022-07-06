@@ -10,3 +10,7 @@ class HomePageView(TemplateView):
 
 class NotebookPageView(TemplateView):
     template_name = "pages/notebook.html"
+
+
+class GuidePageView(TemplateView):
+    template_name = "pages/guide.html"
