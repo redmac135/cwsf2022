@@ -112,31 +112,3 @@ def plotVolcano(sample, threshold_x=1.0, threshold_y=1.301):
     ]
 
     return log2FC, p, colors
-
-
-"""
-TO-DO: Convert matplotlib stuff to chart.js
-
-Plotting Instructions
-    Comparison Plot:
-        plt.title('Log10 Comparison Plot')
-        plt.xlabel('Healthy')
-        plt.ylabel('Cancer')
-        plt.show()
-
-        plt.scatter(log_sample, log_control, s=5, c=colors)
-        plt.plot(x, y1, color='black')
-        plt.plot(x, y2, color='black')
-
-    Volcano Plot:
-        control_vs_target_log2(sample, control, size=25)
-        plt.title('Volcano Plot')
-        plt.xlabel('Log2 Fold Change')
-        plt.ylabel('-log10(P-value)')
-        plt.show()
-
-        plt.scatter(log2FC, p, s=size, c=colors)
-        plt.axhline(y=threshold_y, color='black')
-        plt.axvline(x=threshold_x, color='black')
-        plt.axvline(x=-threshold_x, color='black')
-"""
