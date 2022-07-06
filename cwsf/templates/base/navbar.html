@@ -23,19 +23,25 @@
     </div>
     <div class="flex shadow-md">
         <ul class="flex m-auto">
+            <!-- home page -->
+            <li class="px-5 py-3 text-lg font-semibold">
+                <a href="{% url 'home' %}" class="nav-link">
+                    Home
+                </a>
+            </li>
             <li class="px-5 py-3 text-lg font-semibold">
                 <a href="{% url 'diagnose' %}" class="nav-link">
-                    Diagnosis
+                    AI Diagnosis
                 </a>
             </li>
             <li class="px-5 py-3 text-lg font-semibold">
                 <a href="{% url 'genelab' %}"  class="nav-link">
-                    Gene Sequence Exploration
+                    Gene Lab
                 </a>
             </li>
             <li class="px-5 py-3 text-lg font-semibold">
                 <a class="nav-link">
-                    AI Program Guide
+                    Guide
                 </a>
             </li>
             <li class="px-5 py-3 text-lg font-semibold">
