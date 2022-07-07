@@ -94,12 +94,11 @@ class GenelabView(View):
             log_samples, log_control, comp_colors = plotComparison(results)
             log2FC, p, volcano_colors = plotVolcano(results)
 
-            comp = [
-                {"x": log_samples[i], "y": log_control[i]}
-                for i in range(len(log_samples))
-            ]
+            comp = [{"x": log_samples[i], "y": log_control[i]} for i in range(len(log_samples))]
+            comp_labels = [geneNames[i] for i in range(len(comp))]
 
             volcano = [{"x": log2FC[i], "y": p[i]} for i in range(len(log2FC))]
+            volcano_labels = [geneNames[i] for i in range(len(volcano))]
 
             matrix_colors = linear_color_map(results).tolist()
         except ValueError:
@@ -110,8 +109,10 @@ class GenelabView(View):
             self.template_names[1],
             {
                 "comp": comp,
+                "comp_labels": comp_labels,
                 "comp_colors": comp_colors,
                 "volcano": volcano,
+                "volcano_labels": volcano_labels,
                 "volcano_colors": volcano_colors,
                 "matrix_data": json.dumps(
                     {
@@ -181,8 +182,10 @@ def genelab_file(request, filename: str = ""):
     log2FC, p, volcano_colors = plotVolcano(results)
 
     comp = [{"x": log_samples[i], "y": log_control[i]} for i in range(len(log_samples))]
+    comp_labels = [geneNames[i] for i in range(len(comp))]
 
     volcano = [{"x": log2FC[i], "y": p[i]} for i in range(len(log2FC))]
+    volcano_labels = [geneNames[i] for i in range(len(volcano))]
 
     matrix_colors = linear_color_map(results).tolist()
     return render(
@@ -190,8 +193,10 @@ def genelab_file(request, filename: str = ""):
         GenelabView.template_names[1],
         {
             "comp": comp,
+            "comp_labels": comp_labels,
             "comp_colors": comp_colors,
             "volcano": volcano,
+            "volcano_labels": volcano_labels,
             "volcano_colors": volcano_colors,
             "matrix_data": json.dumps(
                 {

@@ -9,14 +9,15 @@
 <div class="flex">
   <div class="flex m-auto">
     <div class="w-1/2 p-3">
-      <canvas id="comparison" width="500" height="500"></canvas>
-      <canvas id="volcano" width="500" height="500"></canvas>
+      <canvas id="comparison" width="1000" height="500"></canvas>
+      <canvas id="volcano" width="1000" height="500"></canvas>
       <script>
         let ctx = document.getElementById("comparison").getContext("2d");
 
         let chart = new Chart(ctx, {
             type: "scatter",
             data: {
+                labels: {{ comp_labels| safe }},
                 datasets: [{
                     label: "Log10 Comparison Plot",
                     backgroundColor: {{ comp_colors| safe }},
@@ -38,7 +39,15 @@
                             labelString: "Control Genes"
                         }
                     }]
-                }
+                },
+                tooltips: {
+                  callbacks: {
+                      label: function(tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index];
+                        return label + ': (' + tooltipItem.xLabel.toFixed(4) + ', ' + tooltipItem.yLabel.toFixed(4) + ')';
+                      }
+                  }
+              }
             }
         });
 
@@ -47,6 +56,7 @@
         let chart2 = new Chart(ctx2, {
             type: "scatter",
             data: {
+                labels: {{ volcano_labels| safe }},
                 datasets: [{
                     label: "Volcano Plot",
                     backgroundColor: {{ volcano_colors| safe }},
@@ -68,7 +78,15 @@
                             labelString: "-log10(p-value)"
                         }
                     }]
-                }
+                },
+                tooltips: {
+                  callbacks: {
+                      label: function(tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index];
+                        return label + ': (' + tooltipItem.xLabel.toFixed(4) + ', ' + tooltipItem.yLabel.toFixed(4) + ')';
+                      }
+                  }
+              }
             }
         });
       </script>
