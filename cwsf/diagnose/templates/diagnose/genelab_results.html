@@ -2,9 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 {% endblock %} {% block content %}
 <div class="relative flex items-center w-2/3 py-5 m-auto">
-  <div class="flex-grow border-t border-gray-500"></div>
+  <div class="flex-grow border-t border-white-500"></div>
   <span class="flex-shrink mx-4 text-4xl font-bold">Statistical Analysis</span>
-  <div class="flex-grow border-t border-gray-500"></div>
+  <div class="flex-grow border-t border-white-500"></div>
 </div>
 <div class="flex">
   <div class="flex m-auto">
@@ -12,6 +12,8 @@
       <canvas id="comparison" width="1000" height="500"></canvas>
       <canvas id="volcano" width="1000" height="500"></canvas>
       <script>
+        Chart.defaults.global.defaultFontColor = '#EAECEE';
+
         let ctx = document.getElementById("comparison").getContext("2d");
 
         let chart = new Chart(ctx, {
