@@ -14,3 +14,7 @@ class NotebookPageView(TemplateView):
 
 class GuidePageView(TemplateView):
     template_name = "pages/guide.html"
+
+
+class AccomplishmentsView(TemplateView):
+    template_name = "pages/accomplishments.html"
