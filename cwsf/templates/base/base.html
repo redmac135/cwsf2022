@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'base/css/base.css' %}" />
     <link
       rel="shortcut icon"
@@ -19,4 +20,12 @@
   <body>
     {% include 'base/navbar.html' %} {% block content %} {% endblock %}
   </body>
+  <footer style="text-align:center">
+    <br>
+    <a href="https://www.facebook.com/people/FourSight-FourSight/100082851579519/" target="_blank" class="fa fa-facebook"></a>
+    <a href="https://www.instagram.com/foursightcancer/" target="_blank" class="fa fa-instagram"></a>
+    <a href="https://www.linkedin.com/in/foursight-company-20486b243/" target="_blank" class="fa fa-linkedin"></a>
+    <br>
+    <small>&copy; <script>document.write(new Date().getFullYear())</script>, FourSight</small>
+  </footer>
 </html>
