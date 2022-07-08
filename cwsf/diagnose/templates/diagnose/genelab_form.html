@@ -32,17 +32,17 @@
 <div class="example-container flex text-center lg:w-2/3 m-auto">
   {% for example in examples %}
   <div
-    class="flex flex-col w-1/3 p-3 cursor-pointer shrink flex-auto m-4 rounded-md shadow-lg bg-blue-200"
+    class="flex flex-col items-center w-1/3 p-3 cursor-pointer shrink flex-auto m-4 rounded-md shadow-lg bg-blue-200"
   >
     <h4 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
       Example {{ example.0 }}
     </h4>
-    <button
-      class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-ou"
+    <a
+      href="{% url 'download' filename=example.1 %}"
+      class="inline-flex items-center shrink"
     >
-      <a
-        href="{% url 'download' filename=example.1 %}"
-        class="inline-flex items-center shrink"
+      <button
+        class="flex inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-ou"
       >
         <svg
           class="fill-current w-4 h-4 mr-2"
@@ -52,18 +52,18 @@
           <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
         </svg>
         <span>Download</span>
-      </a>
-    </button>
-    <button
-      class="bg-green-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+      </button>
+    </a>
+    <a
+      href="{% url 'genelab_file' filename=example.1 %}"
+      class="inline-flex items-center"
     >
-      <a
-        href="{% url 'genelab_file' filename=example.1 %}"
-        class="inline-flex items-center"
+      <button
+        class="bg-green-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
       >
         <span>Run Example</span>
-      </a>
-    </button>
+      </button></a
+    >
   </div>
   {% endfor %}
 </div>
@@ -71,7 +71,7 @@
 <div class="flex-auto p-2 m-auto rounded-md shadow-lg lg:w-1/3 bg-blue-200">
   <div class="flex flex-col items-center">
     <h2 class="inline-block mb-2 text-black font-bold">Guide</h2>
-    <p class="text-black">
+    <p class="text-black text-center">
       Upload your microRNA Genetic Profile in a comma seperated .txt file.<br />
       The AI will then perform a differential gene expression analysis on the
       profile and display its findings.
