@@ -5,7 +5,7 @@
     "fields": {
       "name": "Louis Wu",
       "image": "headshots/louis.jpg",
-      "summary": "Anime collector"
+      "summary": "Our first team member specializes in biology, behavioral sciences, and product design. He is a Remarkable Students Showcase Champion, won gold at the Canada-Wide Science Fair, and was chosen to represent Canada at the EU Contest for Young Scientists."
     }
   },
   {
@@ -13,8 +13,8 @@
     "pk": 2,
     "fields": {
       "name": "Koral Kulacoglu",
-      "image": "headshots/sample.jpg",
-      "summary": "My EE was ai generated"
+      "image": "headshots/koral.jpg",
+      "summary": "Koral specializes in engineering, programming, and neural networks. Alongside Louis, Koral was one of the original developers of the FourSight project."
     }
   },
   {
@@ -23,7 +23,7 @@
     "fields": {
       "name": "Ethan Zhao",
       "image": "headshots/ethan.jpg",
-      "summary": "Django one trick"
+      "summary": "Ethan specializes in web design and production. He manages website design, video editing, and video design."
     }
   },
   {
@@ -31,17 +31,8 @@
     "pk": 4,
     "fields": {
       "name": "Alex Gan",
-      "image": "headshots/sample.jpg",
-      "summary": "rat"
-    }
-  },
-  {
-    "model": "pages.person",
-    "pk": 5,
-    "fields": {
-      "name": "Bryan Deng",
-      "image": "headshots/sample.jpg",
-      "summary": "friendly neighborhood react hater"
+      "image": "headshots/alex.jpg",
+      "summary": "Alex specializes in finance, business management, and corporate development. Alex worked for the Ontario Public Service as a Finance & Risk Assistant and is now focused on corporate development of FourSight."
     }
   }
 ]
