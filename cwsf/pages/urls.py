@@ -4,7 +4,6 @@ from .views import (
     NotebookPageView,
     GuidePageView,
     AccomplishmentsView,
-    PersonViewSet,
 )
 
 urlpatterns = [
@@ -12,5 +11,4 @@ urlpatterns = [
     path("notebook/", NotebookPageView.as_view(), name="notebook"),
     path("guide/", GuidePageView.as_view(), name="guide"),
     path("accomplishments/", AccomplishmentsView.as_view(), name="accomplishments"),
-    path("api/person/<str:name>", PersonViewSet.as_view({"get": "retrieve"})),
 ]

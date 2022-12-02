@@ -111,22 +111,58 @@
       <div class="flex-grow border-t border-white-500"></div>
     </div>
     <div class="flex text-center">
-
-    {% for person in people %}
-      <button class="w-1/3 p-3 cursor-pointer fade-in5" onclick="getPerson('{{ person.name }}')">
+      <button class="w-1/3 p-3 cursor-pointer fade-in5" onclick="getPerson('Louis Wu')">
         <div class="overflow-hidden rounded-t-md">
           <img
-            src="{% static person.image %}"
+            src="{% static 'headshots/louis.jpg' %}"
             class="object-fill duration-200 hover:scale-110"
           />
         </div>
         <div
           class="p-1 text-lg text-black font-semibold bg-slate-200 rounded-b-md"
         >
-          {{ person.name }}
+          Louis Wu
         </div>
       </button>
-    {% endfor %}
+      <button class="w-1/3 p-3 cursor-pointer fade-in5" onclick="getPerson('Koral Kulacoglu')">
+        <div class="overflow-hidden rounded-t-md">
+          <img
+            src="{% static 'headshots/koral.jpg' %}"
+            class="object-fill duration-200 hover:scale-110"
+          />
+        </div>
+        <div
+          class="p-1 text-lg text-black font-semibold bg-slate-200 rounded-b-md"
+        >
+        Koral Kulacoglu
+        </div>
+      </button>
+      <button class="w-1/3 p-3 cursor-pointer fade-in5" onclick="getPerson('Ethan Zhao')">
+        <div class="overflow-hidden rounded-t-md">
+          <img
+            src="{% static 'headshots/ethan.jpg' %}"
+            class="object-fill duration-200 hover:scale-110"
+          />
+        </div>
+        <div
+          class="p-1 text-lg text-black font-semibold bg-slate-200 rounded-b-md"
+        >
+        Ethan Zhao
+        </div>
+      </button>
+      <button class="w-1/3 p-3 cursor-pointer fade-in5" onclick="getPerson('Alex Gan')">
+        <div class="overflow-hidden rounded-t-md">
+          <img
+            src="{% static 'headshots/alex.jpg' %}"
+            class="object-fill duration-200 hover:scale-110"
+          />
+        </div>
+        <div
+          class="p-1 text-lg text-black font-semibold bg-slate-200 rounded-b-md"
+        >
+        Alex Gan
+        </div>
+      </button>
     </div>
 
     <div class="py-10">
