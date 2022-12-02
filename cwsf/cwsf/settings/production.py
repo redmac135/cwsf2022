@@ -1,6 +1,4 @@
 from .defaults import *
-import dj_database_url
-
 DEBUG = False
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
