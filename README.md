@@ -1,4 +1,6 @@
-# cwsf2022
+# Foursight
+
+A 95% accurate early cancer detection too which uses micro-RNA sequences as input.
 
 ## Installation
 
@@ -9,15 +11,14 @@ git clone https://github.com/redmac135/cwsf2022.git
 cd cwsf2022
 ```
 
-Install dependencies:
+Build Docker image
 
 ```bash
-pip install -r requirements.txt
+docker build
 ```
 
-Start the server
+Start the server and run Docker image
 
 ```bash
-cd cwsf
-python manage.py runserver
+docker run
 ```
