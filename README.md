@@ -8,6 +8,8 @@ AI Training: https://www.kaggle.com/code/koralkulacoglu/microarray-cancer-classi
 
 Differential Analysis: https://www.kaggle.com/code/koralkulacoglu/microarray-cancer-differential-gene-analysis
 
+![image](https://github.com/redmac135/cwsf2022/assets/62809012/2cd4a8b7-82ef-4d27-8df1-6907f3ff3383)
+
 ## Installation
 
 Clone the repository:
